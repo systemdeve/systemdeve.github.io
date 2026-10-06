@@ -2,811 +2,517 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Daily Light — Verse, Encouragement &amp; a Moment to Breathe</title>
-<meta name="description" content="A new Bible verse, a line of encouragement, and a minute to breathe — every day.">
-<meta name="google-adsense-account" content="ca-pub-3070013351505360">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Endless Quiz</title>
 <style>
-  :root{
-    --bg: #FBF7EF;
-    --card: #FFFEFA;
-    --line: #E7DFCC;
-    --ink: #2B2417;
-    --muted: #83795F;
-    --gold: #B4842A;
-    --gold-soft: #E9CE9C;
-    --teal: #3F6659;
-    --sky-top: #16213E;
-    --sky-bottom: #F3B562;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--ink);
-    font-family:'Inter', -apple-system, sans-serif;
-    line-height:1.55;
-  }
-  .wrap{ max-width:640px; margin:0 auto; padding: 0 20px 80px; }
-
-  /* Site nav */
-  .site-nav{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:10px;
-    padding: 16px 20px;
-    background: var(--sky-top);
-  }
-  .brand{
-    color:#FFFBF2;
-    font-family:'Cormorant Garamond', serif;
-    font-size:1.25rem;
-    font-weight:600;
-    text-decoration:none;
-  }
-  .nav-links a{
-    color:#EFE3D2;
-    text-decoration:none;
-    margin-left:18px;
-    font-size:0.85rem;
-  }
-  .nav-links a:hover{ color: var(--gold-soft); }
-
-  /* Hero */
-  .hero{
-    background: linear-gradient(180deg, var(--sky-top) 0%, #6B4E63 55%, var(--sky-bottom) 100%);
-    padding: 56px 20px 64px;
-    text-align:center;
-    position:relative;
-    overflow:hidden;
-  }
-  .hero::after{
-    content:'';
-    position:absolute;
-    left:50%; bottom:-90px;
-    width:340px; height:340px;
-    border-radius:50%;
-    background: radial-gradient(circle, rgba(255,238,205,0.55), transparent 70%);
-    transform: translateX(-50%);
-    pointer-events:none;
-  }
-  .hero-inner{ position:relative; max-width:560px; margin:0 auto; }
-  .kicker{
-    color: #F6DFB0;
-    font-size:0.8rem;
-    letter-spacing:0.14em;
-    margin: 0 0 14px;
-    font-weight:600;
-  }
-  h1{
-    font-family:'Cormorant Garamond', serif;
-    font-weight:600;
-    font-size: clamp(2.4rem, 8vw, 3.4rem);
-    margin: 0 0 14px;
-    color: #FFFBF2;
-    line-height:1.05;
-  }
-  .hero p{
-    color: #EFE3D2;
-    font-size:1.02rem;
-    margin: 0;
-  }
-  .streak{
-    display:inline-block;
-    margin-top:22px;
-    padding: 7px 16px;
-    border-radius: 999px;
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.25);
-    color:#FFFBF2;
-    font-size:0.85rem;
-  }
-  .streak strong{ color: #F6DFB0; }
-
-  /* Cards */
-  main{ margin-top: -34px; position:relative; }
-  .card{
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-left: 3px solid var(--gold-soft);
-    border-radius: 4px;
-    padding: 30px 28px;
-    margin-bottom: 20px;
-    box-shadow: 0 18px 30px -22px rgba(43,36,23,0.35);
-  }
-  .card.teal{ border-left-color: var(--teal); }
-  .card-label{
-    font-size:0.78rem;
-    letter-spacing:0.1em;
-    color: var(--gold);
-    margin: 0 0 16px;
-    font-weight:600;
-  }
-  .card.teal .card-label{ color: var(--teal); }
-
-  .verse-text{
-    font-family:'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 1.5rem;
-    line-height:1.5;
-    margin: 0 0 12px;
-    max-width: 46ch;
-  }
-  .verse-ref{
-    color: var(--muted);
-    font-size:0.9rem;
-    margin: 0 0 22px;
-  }
-
-  .encourage-text{
-    font-size: 1.15rem;
-    font-weight:500;
-    margin: 0 0 22px;
-    max-width: 46ch;
-  }
-
-  .row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
-
-  button{
-    font-family:'Inter', sans-serif;
-    font-weight:600;
-    font-size:0.88rem;
-    cursor:pointer;
-    border:none;
-    border-radius:5px;
-    padding:10px 18px;
-    background: var(--gold);
-    color: #FFFBF2;
-    transition: transform 0.12s ease, background 0.12s ease;
-  }
-  button:hover{ background:#9A6E20; }
-  button:active{ transform: scale(0.97); }
-  button:focus-visible, a:focus-visible{
-    outline: 2px solid var(--gold);
-    outline-offset: 3px;
-  }
-  button.ghost{
-    background:transparent;
-    border: 1px solid var(--line);
-    color: var(--muted);
-  }
-  button.ghost:hover{ border-color: var(--gold); color: var(--gold); background:transparent; }
-  .card.teal button{ background: var(--teal); }
-  .card.teal button:hover{ background:#2D4A40; }
-  .card.teal button.ghost{ background:transparent; color:var(--muted); border-color:var(--line); }
-  .card.teal button.ghost:hover{ border-color:var(--teal); color:var(--teal); }
-
-  /* Breathing */
-  .breathe-stage{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    padding: 10px 0 4px;
-  }
-  .breathe-circle{
-    width: 130px; height:130px;
-    border-radius:50%;
-    background: radial-gradient(circle at 35% 30%, #F3DDA9, var(--teal));
-    display:flex; align-items:center; justify-content:center;
-    color:#FFFBF2;
-    font-family:'Inter', sans-serif;
-    font-weight:600;
-    font-size:0.95rem;
-    text-align:center;
-    transition: transform 4s ease-in-out;
-    transform: scale(0.72);
-    cursor:pointer;
-  }
-  .breathe-circle.expand{ transform: scale(1); }
-  .breathe-note{
-    margin-top:18px;
-    color: var(--muted);
-    font-size:0.85rem;
-    text-align:center;
-  }
-
-  /* Secondary page sections (About / Privacy / Contact) */
-  .page-section{ padding-top: 50px; }
-  .section-header{ text-align:center; margin-bottom: 6px; }
-  .section-header h2{
-    font-family:'Cormorant Garamond', serif;
-    font-weight:600;
-    font-size: clamp(1.8rem, 6vw, 2.3rem);
-    margin: 0 0 8px;
-  }
-  .section-header p{ color: var(--muted); margin:0; }
-
-  .info-card{
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-left: 3px solid var(--gold-soft);
-    border-radius: 4px;
-    padding: 26px 28px;
-    margin: 20px 0;
-  }
-  .info-card h3{
-    font-family:'Cormorant Garamond', serif;
-    font-size:1.25rem;
-    margin: 0 0 10px;
-  }
-  .info-card p, .info-card li{ margin: 0 0 12px; line-height:1.65; }
-  .info-card ul{ padding-left:20px; }
-  .info-card p:last-child, .info-card ul:last-child{ margin-bottom:0; }
-  .info-card a{ color: var(--gold); }
-
-  .notice{
-    background: #FBF0DC;
-    border: 1px solid var(--gold-soft);
-    border-radius: 4px;
-    padding: 16px 20px;
-    font-size: 0.88rem;
-    color: #6B4E1A;
-    margin: 20px 0;
-  }
-
-  .mail-btn{
-    display:inline-block;
-    margin-top: 6px;
-    padding: 10px 20px;
-    background: var(--gold);
-    color: #FFFBF2;
-    text-decoration:none;
-    border-radius: 5px;
-    font-weight:600;
-    font-size:0.9rem;
-  }
-  .mail-btn:hover{ background:#9A6E20; }
-
-  footer{
-    text-align:center;
-    color: var(--muted);
-    font-size:0.8rem;
-    margin-top: 30px;
-  }
-  .site-footer-links{ margin-top:10px; }
-  .site-footer-links a{ color: var(--muted); text-decoration:underline; margin: 0 8px; font-size:0.8rem; }
-  .site-footer-links a:hover{ color: var(--gold); }
-
-  /* Ambient sound control */
-  .audio-control{
-    position: fixed;
-    right: 16px; bottom: 16px;
-    z-index: 60;
-    display:flex; align-items:center; gap:10px;
-    background: rgba(255,254,250,0.94);
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 9px 16px;
-    box-shadow: 0 10px 24px -12px rgba(43,36,23,0.4);
-    backdrop-filter: blur(6px);
-  }
-  .audio-btn{
-    display:flex; align-items:center; gap:8px;
-    background:transparent;
-    border:none;
-    padding:0;
-    color: var(--ink);
-    font-size:0.85rem;
-    font-weight:600;
-    cursor:pointer;
-  }
-  .audio-btn:hover{ color: var(--gold); background:transparent; }
-  #volumeSlider{ width:70px; accent-color: var(--gold); }
-  @media (max-width: 380px){
-    #audioLabel{ display:none; }
-    .audio-control{ padding: 9px 12px; }
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    *{ transition:none !important; scroll-behavior:auto !important; }
-  }
+:root{--bg:#f2f5f1;--card:#fff;--ink:#1b2a2a;--mute:#5d6e6c;--line:#cfd9d6;--acc:#0f6b66;--ok:#1b7f45;--okbg:#dff3e6;--bad:#b3261e;--badbg:#fbe3e0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101b1a;--card:#182827;--ink:#e6f0ee;--mute:#9bb0ad;--line:#2d4442;--acc:#4fd1c5;--ok:#6fdc9a;--okbg:#17382a;--bad:#ff8f86;--badbg:#401f1d}}
+:root[data-theme="dark"]{--bg:#101b1a;--card:#182827;--ink:#e6f0ee;--mute:#9bb0ad;--line:#2d4442;--acc:#4fd1c5;--ok:#6fdc9a;--okbg:#17382a;--bad:#ff8f86;--badbg:#401f1d}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Georgia,"Times New Roman",serif;min-height:100vh;display:flex;justify-content:center;padding:16px}
+main{width:100%;max-width:560px}
+.top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;font-family:system-ui,sans-serif;font-size:14px;color:var(--mute)}
+.lvl{font-size:44px;font-weight:700;color:var(--acc);font-family:Georgia,serif;line-height:1}
+.lives{font-size:20px;letter-spacing:2px;color:var(--bad)}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:16px}
+.bar i{display:block;height:100%;background:var(--acc);transition:width .3s}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.cat{font-family:system-ui,sans-serif;font-size:13px;color:var(--mute);margin-bottom:8px}
+.q{font-size:22px;line-height:1.4;margin:0 0 18px}
+.opts{display:grid;gap:10px}
+button{font:inherit;cursor:pointer}
+.opt{text-align:left;padding:13px 15px;border:2px solid var(--line);background:transparent;color:var(--ink);border-radius:10px;font-size:18px}
+.opt:hover:not(:disabled){border-color:var(--acc)}
+.opt:focus-visible,.btn:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.opt.ok{border-color:var(--ok);background:var(--okbg)}
+.opt.bad{border-color:var(--bad);background:var(--badbg)}
+.opt:disabled{cursor:default;color:var(--ink)}
+.fb{margin-top:16px;padding:14px;border-radius:10px;font-size:16px;line-height:1.5}
+.fb.ok{background:var(--okbg)}.fb.bad{background:var(--badbg)}
+.fb b{display:block;font-size:18px;margin-bottom:4px}
+.btn{margin-top:14px;width:100%;padding:13px;border:0;border-radius:10px;background:var(--acc);color:var(--bg);font-size:18px;font-weight:700}
+.hide{display:none}.acct{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;font:15px/1.5 system-ui,sans-serif}.acct h2{font:700 17px Georgia,serif;margin:14px 0 6px}.acct input{padding:9px;border:1px solid var(--line);border-radius:8px;background:transparent;color:var(--ink);font:inherit;margin:8px 8px 0 0}.acct button{padding:9px 14px;border:0;border-radius:8px;background:var(--acc);color:var(--bg);font:inherit;font-weight:700;cursor:pointer}.acct ol{margin:0;padding-left:24px}.langbar{display:flex;justify-content:flex-end;margin-bottom:10px}.langbar select{font:15px system-ui,sans-serif;padding:6px 10px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.center{text-align:center}
+.center h1{font-size:34px;margin:6px 0}
+.center p{color:var(--mute);line-height:1.5}
+.big{font-size:56px;font-weight:700;color:var(--acc)}
+.auth h1{font-size:30px;margin:0 0 4px}
+.auth form{display:grid;gap:10px;text-align:left;margin-top:8px}
+.auth input{width:100%;padding:12px;border:2px solid var(--line);border-radius:10px;background:transparent;color:var(--ink);font:17px system-ui,sans-serif}
+.auth input:focus-visible,.tabs button:focus-visible,.lnk:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:14px 0 4px}
+.tabs button{padding:10px;border:2px solid var(--line);border-radius:10px;background:transparent;color:var(--ink);font:600 15px system-ui,sans-serif}
+.tabs button[aria-selected=true]{border-color:var(--acc);background:var(--acc);color:var(--bg)}
+.btn.alt{background:transparent;color:var(--ink);border:2px solid var(--line);margin-top:0}
+.btn:disabled{opacity:.6;cursor:default}
+.lnks{display:flex;justify-content:space-between;gap:10px;margin-top:12px;flex-wrap:wrap}
+.lnk{background:none;border:0;color:var(--acc);text-decoration:underline;font:15px system-ui,sans-serif;padding:6px 2px}
+.amsg{min-height:20px;font:15px/1.4 system-ui,sans-serif;color:var(--bad)}.amsg.good{color:var(--ok)}
+.acct #outBtn{margin-top:10px}
 </style>
 </head>
 <body>
-  <div class="audio-control" id="audioControl">
-    <button id="audioToggleBtn" class="audio-btn" aria-pressed="false">
-      <span id="audioIcon">🎵</span><span id="audioLabel">Play ambient sound</span>
-    </button>
-    <input type="range" id="volumeSlider" min="0" max="100" value="35" aria-label="Ambient sound volume">
+<main>
+  <div class="langbar"><select id="lang" aria-label="Language"></select></div>
+  <div id="auth" class="card center auth hide">
+    <h1 id="aTitle"></h1>
+    <div class="tabs" role="tablist"><button type="button" id="tabIn" role="tab"></button><button type="button" id="tabUp" role="tab"></button></div>
+    <form id="authForm" novalidate>
+      <input id="aName" class="hide" maxlength="20" autocomplete="nickname">
+      <input id="aEmail" type="email" maxlength="254" autocomplete="email" inputmode="email">
+      <input id="aPass" type="password" maxlength="128" autocomplete="current-password">
+      <div id="aMsg" class="amsg" role="alert"></div>
+      <button class="btn" id="aSubmit" type="submit" style="margin-top:0"></button>
+      <button class="btn alt" id="aGoogle" type="button"></button>
+    </form>
+    <div class="lnks"><button type="button" class="lnk" id="aForgot"></button><a class="lnk" href="quiz-privacy.html" target="_blank" rel="noopener">Privacy policy</a></div>
+  </div>
+  <div id="start" class="card center">
+    <h1 id="tTitle"></h1>
+    <p id="tIntro"></p>
+    <p id="best"></p>
+    <button class="btn" id="go"></button>
   </div>
 
-  <nav class="site-nav">
-    <a href="#top" class="brand">Daily Light</a>
-    <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#privacy">Privacy Policy</a>
-      <a href="#contact">Contact</a>
+  <div id="game" class="hide">
+    <div class="top"><div><div class="lvl" id="lvl">1</div><span id="lvlLbl"></span></div><div class="center"><span id="scoreLbl"></span> <b id="score">0</b><br><span id="streakLbl"></span> <b id="streak">0</b></div><div class="lives" id="lives" aria-label="Lives"></div></div>
+    <div class="bar"><i id="prog"></i></div>
+    <div class="card">
+      <div class="cat" id="cat"></div>
+      <p class="q" id="q"></p>
+      <div class="opts" id="opts"></div>
+      <div id="fb" class="fb hide" role="status"></div>
+      <button class="btn hide" id="next">Next level</button>
+      <button class="btn alt hide" id="revive" type="button" style="margin-top:10px"></button>
     </div>
-  </nav>
-
-  <div class="hero" id="top">
-    <div class="hero-inner">
-      <p class="kicker">DAILY LIGHT</p>
-      <h1>A little light for today</h1>
-      <p>One verse, one word of encouragement, and a minute to breathe — new every day.</p>
-      <div class="streak" id="streakLine"></div>
-    </div>
   </div>
 
-  <div class="wrap">
-    <main>
-      <section class="card">
-        <p class="card-label">VERSE FOR TODAY</p>
-        <p class="verse-text" id="verseText"></p>
-        <p class="verse-ref" id="verseRef"></p>
-        <div class="row">
-          <button id="verseNextBtn">Next verse</button>
-          <button class="ghost" id="verseCopyBtn">Copy</button>
-        </div>
-      </section>
+  <section id="acct" class="acct"><b id="acctT"></b><div id="acctMsg"></div><button type="button" id="outBtn" class="hide"></button>
+    <div id="guestBox" class="hide"><input id="nick" maxlength="20"><button id="nickBtn"></button></div>
+    <div id="lbBox" class="hide"><h2 id="lbT"></h2><div id="lbEmpty" class="hide"></div><ol id="lb"></ol></div>
+  </section>
 
-      <section class="card teal">
-        <p class="card-label">TODAY'S ENCOURAGEMENT</p>
-        <p class="encourage-text" id="encourageText"></p>
-        <div class="row">
-          <button id="encourageNextBtn">Next line</button>
-          <button class="ghost" id="encourageCopyBtn">Copy</button>
-        </div>
-      </section>
-
-      <section class="card">
-        <p class="card-label">A MINUTE TO BREATHE</p>
-        <div class="breathe-stage">
-          <div class="breathe-circle" id="breatheCircle">Start</div>
-          <p class="breathe-note" id="breatheNote">A slow, four-count breath — in, hold, out, hold.</p>
-        </div>
-      </section>
-    </main>
-
-    <!-- ABOUT -->
-    <section class="page-section" id="about">
-      <div class="section-header">
-        <h2>About Daily Light</h2>
-        <p>A small, quiet corner of the internet.</p>
-      </div>
-
-      <div class="info-card">
-        <h3>Why this site exists</h3>
-        <p>Daily Light was built as a small daily ritual — one Bible verse, one line of encouragement, and a minute to breathe. The idea is simple: most days don't need a long devotional or a big commitment, just a short pause before the day picks up speed.</p>
-        <p>The content changes automatically each day, so there's always something new to sit with, whether you visit once or make it part of your morning.</p>
-      </div>
-
-      <div class="info-card">
-        <h3>Where the content comes from</h3>
-        <p>The verses on this site are drawn from the King James Version of the Bible, which is in the public domain. The lines of encouragement are written for this site and aren't attributed to any particular author.</p>
-      </div>
-
-      <div class="info-card">
-        <h3>About the breathing exercise and sound</h3>
-        <p>The breathing guide follows a simple box-breathing pattern (in, hold, out, hold) that's commonly used for a quick moment of calm. The background sound isn't a licensed music track — it's generated live in your browser, so it can play without needing to load or store any audio files.</p>
-      </div>
-
-      <div class="info-card">
-        <h3>Your data</h3>
-        <p>This site doesn't have user accounts and doesn't collect personal information on a server. A small daily streak count is saved only in your own browser's local storage, and it stays on your device. See the <a href="#privacy">Privacy Policy</a> below for more detail, including information about advertising.</p>
-      </div>
-    </section>
-
-    <!-- PRIVACY -->
-    <section class="page-section" id="privacy">
-      <div class="section-header">
-        <h2>Privacy Policy</h2>
-        <p>Last updated: <span id="lastUpdated"></span></p>
-      </div>
-
-      <div class="notice">
-        This is a general-purpose privacy policy template covering the basics most ad networks look for. It isn't legal advice, and it doesn't automatically cover every law that may apply to you (such as GDPR in the EU/UK or CCPA in California). Replace the placeholder contact email below with your own, and consider having a lawyer or a dedicated privacy-policy generator review it if you expect visitors from those regions.
-      </div>
-
-      <div class="info-card">
-        <h3>Overview</h3>
-        <p>Daily Light ("this site," "we," "us") is a small personal website. This policy explains what information is collected when you visit, how it's used, and what choices you have.</p>
-      </div>
-
-      <div class="info-card">
-        <h3>Information we collect directly</h3>
-        <p>This site does not have user accounts, does not run a server-side database, and does not ask you to submit personal information anywhere on the site.</p>
-        <p>The site does store a small amount of information in your browser's local storage, kept only on your own device:</p>
-        <ul>
-          <li>A daily visit streak count, so the site can show you how many days in a row you've visited.</li>
-          <li>Your preferred volume level for the ambient sound feature, if you use it.</li>
-        </ul>
-        <p>This information is never sent to us or to any server — it stays in your browser and can be cleared at any time by clearing your browser's site data.</p>
-      </div>
-
-      <div class="info-card">
-        <h3>Cookies and advertising</h3>
-        <p>This site may display ads served through Google AdSense. Google and its advertising partners may use cookies and similar technologies to serve ads based on your prior visits to this or other websites.</p>
-        <p>You can learn more about how Google uses data when you use partner sites, and manage your ad personalization settings, at:</p>
-        <ul>
-          <li><a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">policies.google.com/technologies/partner-sites</a></li>
-          <li><a href="https://adssettings.google.com" target="_blank" rel="noopener">adssettings.google.com</a> — to control the ads you see</li>
-        </ul>
-        <p>Third-party vendors, including Google, may also use cookies to serve ads based on someone's past visits to this website or other websites.</p>
-      </div>
-
-      <div class="info-card">
-        <h3>Analytics</h3>
-        <p>If this site later adds an analytics tool (such as Google Analytics), that tool may collect information like pages visited, approximate location (from IP address), device and browser type, and time spent on the site. This section will be updated if and when such a tool is added.</p>
-      </div>
-
-      <div class="info-card">
-        <h3>Children's privacy</h3>
-        <p>This site is not directed at children under 13, and we do not knowingly collect personal information from children. If you believe a child has provided personal information through this site, please contact us so it can be removed.</p>
-      </div>
-
-      <div class="info-card">
-        <h3>Your choices</h3>
-        <p>You can clear locally stored data at any time through your browser's settings. You can also opt out of personalized advertising through your browser's ad settings or through <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google's Ad Settings</a>, and many browsers let you block cookies entirely, though this may affect how some parts of the site or its ads display.</p>
-      </div>
-
-      <div class="info-card">
-        <h3>Changes to this policy</h3>
-        <p>This policy may be updated from time to time. Changes will be posted on this page with an updated date at the top.</p>
-      </div>
-
-      <div class="info-card">
-        <h3>Contact us</h3>
-        <p>Questions about this policy can be sent through the <a href="#contact">Contact</a> section below.</p>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="page-section" id="contact">
-      <div class="section-header">
-        <h2>Get in touch</h2>
-        <p>Questions, feedback, or a correction to suggest.</p>
-      </div>
-
-      <div class="info-card">
-        <h3>Email</h3>
-        <p>The easiest way to reach us is by email. Replace the address below with your own before publishing this site.</p>
-        <a class="mail-btn" href="mailto:hello@yourdomain.com">hello@yourdomain.com</a>
-      </div>
-
-      <div class="info-card">
-        <h3>What to write in about</h3>
-        <p>Feedback on the verses or encouragement lines, a bug or something that isn't displaying right, a takedown or correction request, or general questions about the site — all welcome.</p>
-      </div>
-    </section>
-
-    <footer>
-      Come back tomorrow for a new verse and a new word.
-      <div class="site-footer-links">
-        <a href="#about">About</a>·<a href="#privacy">Privacy Policy</a>·<a href="#contact">Contact</a>
-      </div>
-    </footer>
+  <div id="over" class="card center hide">
+    <h1 id="tOver"></h1>
+    <div class="big" id="ofin">0</div>
+    <p id="osum"></p>
+    <button class="btn" id="again">Play again</button>
   </div>
+</main>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script>
-(function(){
-  "use strict";
+const $=id=>document.getElementById(id);
+const rnd=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+const pick=a=>a[rnd(0,a.length-1)];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=rnd(0,i);[a[i],a[j]]=[a[j],a[i]]}return a};
+function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
 
-  // ---------- Content ----------
-  var verses = [
-    ["For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.", "John 3:16"],
-    ["I can do all things through Christ which strengtheneth me.", "Philippians 4:13"],
-    ["For I know the thoughts that I think toward you, saith the LORD, thoughts of peace, and not of evil, to give you an expected end.", "Jeremiah 29:11"],
-    ["The LORD is my shepherd; I shall not want.", "Psalm 23:1"],
-    ["Trust in the LORD with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths.", "Proverbs 3:5-6"],
-    ["Fear thou not; for I am with thee: be not dismayed; for I am thy God: I will strengthen thee; yea, I will help thee; yea, I will uphold thee with the right hand of my righteousness.", "Isaiah 41:10"],
-    ["And we know that all things work together for good to them that love God, to them who are the called according to his purpose.", "Romans 8:28"],
-    ["Have not I commanded thee? Be strong and of a good courage; be not afraid, neither be thou dismayed: for the LORD thy God is with thee whithersoever thou goest.", "Joshua 1:9"],
-    ["God is our refuge and strength, a very present help in trouble.", "Psalm 46:1"],
-    ["For we walk by faith, not by sight.", "2 Corinthians 5:7"],
-    ["Take therefore no thought for the morrow: for the morrow shall take thought for the things of itself. Sufficient unto the day is the evil thereof.", "Matthew 6:34"],
-    ["This is the day which the LORD hath made; we will rejoice and be glad in it.", "Psalm 118:24"],
-    ["But they that wait upon the LORD shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; and they shall walk, and not faint.", "Isaiah 40:31"],
-    ["Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God. And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.", "Philippians 4:6-7"],
-    ["The LORD is nigh unto them that are of a broken heart; and saveth such as be of a contrite spirit.", "Psalm 34:18"],
-    ["Commit thy works unto the LORD, and thy thoughts shall be established.", "Proverbs 16:3"],
-    ["Now the God of hope fill you with all joy and peace in believing, that ye may abound in hope, through the power of the Holy Ghost.", "Romans 15:13"],
-    ["The LORD is my light and my salvation; whom shall I fear? the LORD is the strength of my life; of whom shall I be afraid?", "Psalm 27:1"],
-    ["And let us not be weary in well doing: for in due season we shall reap, if we faint not.", "Galatians 6:9"],
-    ["Be strong and of a good courage, fear not, nor be afraid of them: for the LORD thy God, he it is that doth go with thee; he will not fail thee, nor forsake thee.", "Deuteronomy 31:6"],
-    ["I will lift up mine eyes unto the hills, from whence cometh my help. My help cometh from the LORD, which made heaven and earth.", "Psalm 121:1-2"],
-    ["It is of the LORD's mercies that we are not consumed, because his compassions fail not. They are new every morning: great is thy faithfulness.", "Lamentations 3:22-23"],
-    ["Come unto me, all ye that labour and are heavy laden, and I will give you rest.", "Matthew 11:28"],
-    ["Delight thyself also in the LORD; and he shall give thee the desires of thine heart.", "Psalm 37:4"],
-    ["Casting all your care upon him; for he careth for you.", "1 Peter 5:7"],
-    ["The name of the LORD is a strong tower: the righteous runneth into it, and is safe.", "Proverbs 18:10"],
-    ["Cast thy burden upon the LORD, and he shall sustain thee: he shall never suffer the righteous to be moved.", "Psalm 55:22"],
-    ["Now faith is the substance of things hoped for, the evidence of things not seen.", "Hebrews 11:1"],
-    ["For God hath not given us the spirit of fear; but of power, and of love, and of a sound mind.", "2 Timothy 1:7"],
-    ["The LORD is good, a strong hold in the day of trouble; and he knoweth them that trust in him.", "Nahum 1:7"]
-  ];
+// ---------- Languages
+const LANGS={en:"English",fil:"Filipino",es:"Español"};
+const L={
+en:{title:"Endless Quiz",intro:"One question per level, and the levels never end. Every answer is revealed with a short explanation. You have 3 lives, and you earn one back every 5 levels.",best:(l,s)=>`Best: level ${l}, ${s} points`,nobest:"No best score yet. Set one!",start:"Start level 1",level:"Level",score:"Score",streak:"Streak",ok:p=>`Correct! +${p} points`,bad:a=>`Not quite. The answer is ${a}.`,bonus:l=>`Bonus: you earned an extra life for finishing level ${l}.`,next:n=>`Go to level ${n}`,results:"See results",over:"Game over",reached:(l,r)=>`You reached level ${l} and answered ${r} correctly.`,nb:" New best score!",again:"Play again",
+ cat:{arith:"Mental math",seq:"Number patterns",bin:"Binary",rom:"Roman numerals",pct:"Percentages",prime:"Primes",tri:"Trivia"},
+ qa:x=>`What is ${x}?`,qs:s=>`What comes next?  ${s}, ?`,qb:b=>`What is the binary number ${b} in decimal?`,qr:r=>`Which number is ${r}?`,qp:(p,b)=>`What is ${p}% of ${b}?`,qpr:"Which of these numbers is prime?",
+ sAdd:(d,x,n)=>`Each term adds ${d}, so the next is ${x} + ${d} = ${n}.`,sMul:(r,x,n)=>`Each term is multiplied by ${r}, so the next is ${x} × ${r} = ${n}.`,sSq:(o,n,r)=>`These are consecutive squares (${o}², ${o+1}², ...). The next is ${n}² = ${r}.`,sFib:(x,y,n)=>`Each term is the sum of the two before it (Fibonacci-style), so ${x} + ${y} = ${n}.`,
+ eb:t=>`Add the place values where there is a 1: ${t}.`,er:(r,n)=>`${r} = ${n}. Read left to right, subtracting when a smaller symbol comes before a larger one (like IV = 4).`,ep:(p,d)=>`${p} has no divisors besides 1 and itself. The others are not prime: ${d}.`},
+fil:{title:"Walang Hanggang Kuwiz",intro:"Isang tanong bawat level, at walang katapusan ang mga level. Ipinapakita ang tamang sagot kasama ang maikling paliwanag. May 3 buhay ka at may dagdag na isa kada 5 level.",best:(l,s)=>`Pinakamahusay: level ${l}, ${s} puntos`,nobest:"Wala pang best score. Gumawa ka na!",start:"Simulan ang level 1",level:"Level",score:"Puntos",streak:"Sunod-sunod",ok:p=>`Tama! +${p} puntos`,bad:a=>`Mali. Ang sagot ay ${a}.`,bonus:l=>`Bonus: may dagdag kang buhay dahil natapos mo ang level ${l}.`,next:n=>`Pumunta sa level ${n}`,results:"Tingnan ang resulta",over:"Tapos na ang laro",reached:(l,r)=>`Umabot ka sa level ${l} at ${r} ang tama mong sagot.`,nb:" Bagong best score!",again:"Maglaro ulit",
+ cat:{arith:"Mental math",seq:"Mga pattern ng numero",bin:"Binary",rom:"Roman numerals",pct:"Porsiyento",prime:"Prime",tri:"Trivia"},
+ qa:x=>`Ano ang ${x}?`,qs:s=>`Ano ang susunod?  ${s}, ?`,qb:b=>`Ano ang binary na ${b} sa decimal?`,qr:r=>`Anong numero ang ${r}?`,qp:(p,b)=>`Ano ang ${p}% ng ${b}?`,qpr:"Alin sa mga numerong ito ang prime?",
+ sAdd:(d,x,n)=>`Dinadagdagan ng ${d} ang bawat termino, kaya ang susunod ay ${x} + ${d} = ${n}.`,sMul:(r,x,n)=>`Minumultiply ng ${r} ang bawat termino, kaya ang susunod ay ${x} × ${r} = ${n}.`,sSq:(o,n,r)=>`Magkakasunod na kuwadrado ito (${o}², ${o+1}², ...). Ang susunod ay ${n}² = ${r}.`,sFib:(x,y,n)=>`Ang bawat termino ay kabuuan ng dalawang nauna (istilong Fibonacci), kaya ${x} + ${y} = ${n}.`,
+ eb:t=>`Pagsamahin ang place value kung saan may 1: ${t}.`,er:(r,n)=>`${r} = ${n}. Basahin mula kaliwa pakanan at ibawas kapag nauuna ang mas maliit na simbolo sa mas malaki (tulad ng IV = 4).`,ep:(p,d)=>`Walang divisor ang ${p} maliban sa 1 at sa sarili nito. Hindi prime ang iba: ${d}.`},
+es:{title:"Quiz Infinito",intro:"Una pregunta por nivel, y los niveles no se acaban. Cada respuesta se revela con una breve explicación. Tienes 3 vidas y recuperas una cada 5 niveles.",best:(l,s)=>`Mejor: nivel ${l}, ${s} puntos`,nobest:"Aún no hay récord. ¡Marca uno!",start:"Empezar nivel 1",level:"Nivel",score:"Puntos",streak:"Racha",ok:p=>`¡Correcto! +${p} puntos`,bad:a=>`No exactamente. La respuesta es ${a}.`,bonus:l=>`Bonus: ganaste una vida extra por terminar el nivel ${l}.`,next:n=>`Ir al nivel ${n}`,results:"Ver resultados",over:"Fin del juego",reached:(l,r)=>`Llegaste al nivel ${l} y acertaste ${r}.`,nb:" ¡Nuevo récord!",again:"Jugar otra vez",
+ cat:{arith:"Cálculo mental",seq:"Patrones numéricos",bin:"Binario",rom:"Números romanos",pct:"Porcentajes",prime:"Primos",tri:"Cultura general"},
+ qa:x=>`¿Cuánto es ${x}?`,qs:s=>`¿Qué número sigue?  ${s}, ?`,qb:b=>`¿Cuál es el número binario ${b} en decimal?`,qr:r=>`¿Qué número es ${r}?`,qp:(p,b)=>`¿Cuánto es el ${p} % de ${b}?`,qpr:"¿Cuál de estos números es primo?",
+ sAdd:(d,x,n)=>`Cada término suma ${d}, así que el siguiente es ${x} + ${d} = ${n}.`,sMul:(r,x,n)=>`Cada término se multiplica por ${r}, así que el siguiente es ${x} × ${r} = ${n}.`,sSq:(o,n,r)=>`Son cuadrados consecutivos (${o}², ${o+1}², ...). El siguiente es ${n}² = ${r}.`,sFib:(x,y,n)=>`Cada término es la suma de los dos anteriores (estilo Fibonacci), así que ${x} + ${y} = ${n}.`,
+ eb:t=>`Suma los valores de posición donde hay un 1: ${t}.`,er:(r,n)=>`${r} = ${n}. Lee de izquierda a derecha y resta cuando un símbolo menor va antes de uno mayor (como IV = 4).`,ep:(p,d)=>`${p} solo es divisible entre 1 y entre sí mismo. Los demás no son primos: ${d}.`}
+};
+// Translated answer words (anything missing stays as is)
+const W={
+fil:{Pacific:"Pasipiko",Atlantic:"Atlantiko",Diamond:"Diyamante",Quartz:"Kuwarts",Steel:"Bakal",Granite:"Granito",Honey:"Pulot-pukyutan",Rice:"Bigas",Butter:"Mantikilya",Flour:"Harina"},
+es:{Jupiter:"Júpiter",Saturn:"Saturno",Neptune:"Neptuno",Earth:"Tierra",Mercury:"Mercurio",Mars:"Marte","Carbon dioxide":"Dióxido de carbono",Oxygen:"Oxígeno",Nitrogen:"Nitrógeno",Helium:"Helio",Hydrogen:"Hidrógeno",Carbon:"Carbono",Pacific:"Pacífico",Atlantic:"Atlántico",Indian:"Índico",Arctic:"Ártico",Diamond:"Diamante",Quartz:"Cuarzo",Steel:"Acero",Granite:"Granito","Vatican City":"Ciudad del Vaticano",Monaco:"Mónaco","Red blood cells":"Glóbulos rojos","White blood cells":"Glóbulos blancos",Platelets:"Plaquetas",Honey:"Miel",Rice:"Arroz",Butter:"Mantequilla",Flour:"Harina",Antarctica:"Antártida",Arabian:"Arábigo",Russia:"Rusia",USA:"EE. UU.",France:"Francia",Sydney:"Sídney"}
+};
+let lang=(()=>{const s=store("eq_lang");if(L[s])return s;const n=(navigator.language||"en").slice(0,2);return n==="tl"||n==="fil"?"fil":L[n]?n:"en"})();
+const t=()=>L[lang];
+const tr=o=>(W[lang]&&W[lang][o])||o;
 
-  var encouragements = [
-    "You don't need to see the whole staircase. Just take the next step.",
-    "Progress, not perfection, is the goal today.",
-    "Small, steady steps still move you forward.",
-    "You've made it through every hard day so far. That's a real track record.",
-    "Rest is not quitting. It's part of the work.",
-    "You are allowed to start again as many times as you need to.",
-    "The fact that it's hard doesn't mean you're doing it wrong.",
-    "One honest effort today is enough for today.",
-    "You don't have to carry tomorrow's weight this morning.",
-    "Showing up counts, even on the days it doesn't feel like it.",
-    "Your pace is still progress.",
-    "Growth is quiet most days. Keep going anyway.",
-    "You're closer than you were yesterday, even if you can't feel it yet.",
-    "Let today be enough. Tomorrow can take care of itself.",
-    "You are not behind. You are exactly in the middle of your own timeline.",
-    "It's okay to do the small thing today. Small things add up.",
-    "Be patient with yourself the way you'd be patient with someone you love.",
-    "Nothing you're carrying today is too heavy to set down for a minute.",
-    "You are allowed to be proud of getting through a hard week.",
-    "The days that feel unremarkable are often the ones building the most.",
-    "Keep your promises to yourself, especially the small ones.",
-    "You're doing better than the voice in your head gives you credit for.",
-    "Take the next right step. That's all today is asking of you.",
-    "You don't have to feel ready to begin.",
-    "Every morning is a chance to set today down and pick up something new.",
-    "You are worth the same care you give to everyone else.",
-    "Quiet consistency beats loud bursts of effort.",
-    "It's okay to rest before you're completely worn out.",
-    "The size of the step doesn't matter as much as the direction.",
-    "You showed up today. Let that be enough for now."
-  ];
+// ---------- Trivia: [difficulty, question, correct, [wrong x3], explanation]
+const T=[
+[1,"Which planet is the largest in our solar system?","Jupiter",["Saturn","Neptune","Earth"],"Jupiter is more than twice as massive as all the other planets combined."],
+[1,"What is the chemical symbol for gold?","Au",["Ag","Gd","Go"],"Au comes from the Latin word aurum. Ag (silver) is argentum."],
+[1,"Which planet is known as the Red Planet?","Mars",["Venus","Mercury","Jupiter"],"Iron oxide (rust) in Mars's soil gives it a reddish color."],
+[1,"How many legs does a spider have?","8",["6","10","12"],"Spiders are arachnids with eight legs. Insects have six."],
+[1,"Which is the largest ocean on Earth?","Pacific",["Atlantic","Indian","Arctic"],"The Pacific covers about a third of Earth's surface, more than all land combined."],
+[1,"What gas do plants absorb from the air for photosynthesis?","Carbon dioxide",["Oxygen","Nitrogen","Helium"],"Plants turn CO2 and water into sugar and release oxygen."],
+[1,"Who painted the Mona Lisa?","Leonardo da Vinci",["Michelangelo","Raphael","Van Gogh"],"Leonardo painted it in the early 1500s. It hangs in the Louvre in Paris."],
+[1,"What is the hardest natural substance?","Diamond",["Quartz","Steel","Granite"],"Diamond rates 10 on the Mohs scale, the top of the hardness scale."],
+[2,"What is the capital of Australia?","Canberra",["Sydney","Melbourne","Perth"],"Canberra was purpose-built as a compromise between rivals Sydney and Melbourne."],
+[2,"How many bones does an adult human body have?","206",["186","256","300"],"Babies are born with about 270, and many fuse together as they grow."],
+[2,"Which planet is the hottest in the solar system?","Venus",["Mercury","Mars","Jupiter"],"Venus's thick CO2 atmosphere traps heat, reaching about 465 °C, hotter than closer Mercury."],
+[2,"What is the smallest country in the world?","Vatican City",["Monaco","San Marino","Liechtenstein"],"Vatican City covers only about 0.44 km²."],
+[2,"In what year did World War II end?","1945",["1943","1946","1939"],"Germany surrendered in May 1945 and Japan in September 1945."],
+[2,"Which blood cells carry oxygen around the body?","Red blood cells",["White blood cells","Platelets","Plasma"],"Hemoglobin inside red blood cells binds oxygen."],
+[2,"Who wrote the novel 1984?","George Orwell",["Aldous Huxley","Ray Bradbury","H. G. Wells"],"Orwell published it in 1949. It introduced Big Brother and 'doublethink'."],
+[2,"What is the capital of Canada?","Ottawa",["Toronto","Vancouver","Montreal"],"Ottawa was chosen in 1857, partly as a neutral choice between English and French regions."],
+[3,"How many hearts does an octopus have?","3",["1","2","8"],"Two pump blood through the gills and one pumps it to the rest of the body."],
+[3,"Which element is the most abundant in the universe?","Hydrogen",["Helium","Oxygen","Carbon"],"Hydrogen makes up roughly 75% of ordinary matter by mass."],
+[3,"Which country has the most time zones, counting overseas territories?","France",["Russia","USA","China"],"France's overseas territories give it 12 or 13 time zones, more than Russia's 11."],
+[3,"What is the largest desert on Earth?","Antarctica",["Sahara","Gobi","Arabian"],"A desert is defined by low precipitation, and Antarctica is a cold desert."],
+[3,"About how fast does light travel in a vacuum?","300,000 km/s",["30,000 km/s","3,000,000 km/s","150,000 km/s"],"Light covers about 299,792 km every second, roughly 7.5 laps around Earth."],
+[3,"How many chromosomes do humans normally have?","46",["23","44","48"],"We have 23 pairs: 46 chromosomes in total."],
+[3,"Which food never spoils if stored properly?","Honey",["Rice","Butter","Flour"],"Honey is low in water and acidic, so microbes can't grow. Edible honey was found in ancient Egyptian tombs."],
+[3,"What is the atomic number of carbon?","6",["12","8","4"],"Carbon has 6 protons. 12 is its most common atomic mass."],
+[3,"What is the only even prime number?","2",["0","4","6"],"Every other even number is divisible by 2, so it can't be prime."],
+[3,"Roughly how many islands make up the Philippines?","7,641",["1,107","3,200","10,500"],"The official count is 7,641 islands, though it can change with surveys and tides."]
+];
+// Translations by index: [question, explanation]
+const TR={
+fil:[["Aling planeta ang pinakamalaki sa solar system?","Mahigit dalawang beses na mas mabigat ang Jupiter kaysa sa lahat ng iba pang planeta kung pagsasamahin."],["Ano ang chemical symbol ng ginto?","Galing ang Au sa salitang Latin na aurum. Ang Ag (pilak) ay argentum."],["Aling planeta ang tinatawag na Red Planet?","Ang iron oxide (kalawang) sa lupa ng Mars ang nagbibigay ng pulang kulay nito."],["Ilan ang paa ng gagamba?","Ang mga gagamba ay arachnid na may walong paa. Anim naman ang sa mga insekto."],["Alin ang pinakamalaking karagatan sa mundo?","Halos isang-katlo ng ibabaw ng Earth ang sakop ng Pacific, mas malaki pa sa kabuuang lupa."],["Anong gas ang sinisipsip ng mga halaman para sa photosynthesis?","Ginagawang asukal ng mga halaman ang CO2 at tubig, at naglalabas sila ng oxygen."],["Sino ang nagpinta ng Mona Lisa?","Ipininta ito ni Leonardo noong unang bahagi ng 1500s. Nasa Louvre sa Paris ito."],["Ano ang pinakamatigas na natural na sangkap?","May rating na 10 ang diamond sa Mohs scale, ang pinakamataas."],["Ano ang kabisera ng Australia?","Itinayo ang Canberra bilang kompromiso sa pagitan ng magkaribal na Sydney at Melbourne."],["Ilang buto mayroon ang katawan ng nasa hustong gulang?","Mga 270 ang buto ng sanggol, at marami ang nagdidikit habang lumalaki."],["Aling planeta ang pinakamainit sa solar system?","Hinaharang ng makapal na CO2 sa Venus ang init, kaya umaabot ito sa mga 465 °C, mas mainit pa kaysa sa mas malapit na Mercury."],["Ano ang pinakamaliit na bansa sa mundo?","Mga 0.44 km² lang ang sakop ng Vatican City."],["Anong taon natapos ang World War II?","Sumuko ang Germany noong Mayo 1945 at ang Japan noong Setyembre 1945."],["Aling selula ng dugo ang nagdadala ng oxygen sa katawan?","Ang hemoglobin sa loob ng red blood cells ang kumakapit sa oxygen."],["Sino ang sumulat ng nobelang 1984?","Inilathala ito ni Orwell noong 1949. Dito nagmula ang Big Brother at 'doublethink'."],["Ano ang kabisera ng Canada?","Pinili ang Ottawa noong 1857, bahagyang dahil neutral ito sa pagitan ng mga rehiyong Ingles at Pranses."],["Ilang puso mayroon ang pugita?","Dalawa ang nagpapadaloy ng dugo sa hasang at isa ang nagpapadaloy nito sa natitirang bahagi ng katawan."],["Aling elemento ang pinakamarami sa uniberso?","Humigit-kumulang 75% ng ordinaryong materya ayon sa bigat ay hydrogen."],["Aling bansa ang may pinakamaraming time zone kung kasama ang mga teritoryo sa ibayong-dagat?","Dahil sa mga teritoryo nito sa ibayong-dagat, may 12 o 13 time zone ang France, higit sa 11 ng Russia."],["Alin ang pinakamalaking disyerto sa mundo?","Tinutukoy ang disyerto sa kaunting ulan, at malamig na disyerto ang Antarctica."],["Gaano kabilis ang takbo ng liwanag sa vacuum?","Umaabot sa 299,792 km bawat segundo ang liwanag, mga 7.5 ikot sa buong mundo."],["Ilang chromosome mayroon ang tao?","May 23 pares tayo: 46 na chromosome sa kabuuan."],["Anong pagkain ang hindi nasisira kapag maayos na naitago?","Kaunti ang tubig at maasim ang pulot-pukyutan kaya hindi nabubuhay ang mikrobyo. May nakitang nakakaing honey sa mga libingan ng sinaunang Egypt."],["Ano ang atomic number ng carbon?","May 6 na proton ang carbon. Ang 12 ang pinakakaraniwan nitong atomic mass."],["Ano ang nag-iisang even na prime number?","Nahahati sa 2 ang bawat ibang even na numero, kaya hindi sila prime."],["Humigit-kumulang ilang isla ang bumubuo sa Pilipinas?","7,641 ang opisyal na bilang, bagaman maaari itong magbago sa mga survey at pagtaas-baba ng tubig."]],
+es:[["¿Cuál es el planeta más grande del sistema solar?","Júpiter es más del doble de masivo que todos los demás planetas juntos."],["¿Cuál es el símbolo químico del oro?","Au viene del latín aurum. Ag (plata) viene de argentum."],["¿Qué planeta se conoce como el Planeta Rojo?","El óxido de hierro (herrumbre) del suelo de Marte le da su color rojizo."],["¿Cuántas patas tiene una araña?","Las arañas son arácnidos con ocho patas. Los insectos tienen seis."],["¿Cuál es el océano más grande de la Tierra?","El Pacífico cubre cerca de un tercio de la superficie terrestre, más que toda la tierra firme."],["¿Qué gas absorben las plantas del aire para la fotosíntesis?","Las plantas convierten el CO2 y el agua en azúcar y liberan oxígeno."],["¿Quién pintó la Mona Lisa?","Leonardo la pintó a principios del siglo XVI. Está en el Louvre, en París."],["¿Cuál es la sustancia natural más dura?","El diamante tiene 10 en la escala de Mohs, la máxima."],["¿Cuál es la capital de Australia?","Canberra se construyó como solución intermedia entre las rivales Sídney y Melbourne."],["¿Cuántos huesos tiene un cuerpo humano adulto?","Los bebés nacen con unos 270 y muchos se fusionan al crecer."],["¿Qué planeta es el más caliente del sistema solar?","La densa atmósfera de CO2 de Venus atrapa el calor y llega a unos 465 °C, más que Mercurio, que está más cerca."],["¿Cuál es el país más pequeño del mundo?","La Ciudad del Vaticano ocupa solo unos 0,44 km²."],["¿En qué año terminó la Segunda Guerra Mundial?","Alemania se rindió en mayo de 1945 y Japón en septiembre de 1945."],["¿Qué células de la sangre transportan oxígeno por el cuerpo?","La hemoglobina de los glóbulos rojos se une al oxígeno."],["¿Quién escribió la novela 1984?","Orwell la publicó en 1949. Introdujo al Gran Hermano y el 'doblepensar'."],["¿Cuál es la capital de Canadá?","Ottawa se eligió en 1857, en parte por ser neutral entre las regiones inglesa y francesa."],["¿Cuántos corazones tiene un pulpo?","Dos bombean sangre a las branquias y uno al resto del cuerpo."],["¿Cuál es el elemento más abundante del universo?","El hidrógeno es cerca del 75 % de la materia ordinaria en masa."],["¿Qué país tiene más husos horarios, contando sus territorios de ultramar?","Los territorios de ultramar dan a Francia 12 o 13 husos horarios, más que los 11 de Rusia."],["¿Cuál es el desierto más grande de la Tierra?","Un desierto se define por sus pocas precipitaciones, y la Antártida es un desierto frío."],["¿A qué velocidad viaja la luz en el vacío, aproximadamente?","La luz recorre unos 299 792 km cada segundo, casi 7,5 vueltas a la Tierra."],["¿Cuántos cromosomas tiene normalmente el ser humano?","Tenemos 23 pares: 46 cromosomas en total."],["¿Qué alimento no se echa a perder si se guarda bien?","La miel tiene poca agua y es ácida, así que los microbios no crecen. Se halló miel comestible en tumbas del antiguo Egipto."],["¿Cuál es el número atómico del carbono?","El carbono tiene 6 protones. 12 es su masa atómica más común."],["¿Cuál es el único número primo par?","Todo otro número par es divisible entre 2, así que no puede ser primo."],["¿Aproximadamente cuántas islas forman Filipinas?","La cifra oficial es 7641 islas, aunque puede cambiar con mediciones y mareas."]]
+};
+let bag=[];
 
-  function dayIndex(len){
-    var start = new Date(new Date().getFullYear(), 0, 0);
-    var diff = new Date() - start;
-    var oneDay = 1000 * 60 * 60 * 24;
-    var doy = Math.floor(diff / oneDay);
-    return doy % len;
+// ---------- Procedural generators (infinite). Answers stay language-neutral numbers.
+function numOpts(ans,spread){
+  const s=new Set([ans]);let g=0;
+  while(s.size<4&&g++<80){const v=ans+rnd(1,Math.max(2,spread))*(Math.random()<.5?-1:1);if(v>=0||ans<0)s.add(v)}
+  let i=1;while(s.size<4)s.add(ans+i++);
+  return shuffle([...s]).map(String);
+}
+const roman=n=>{const m=[[1000,"M"],[900,"CM"],[500,"D"],[400,"CD"],[100,"C"],[90,"XC"],[50,"L"],[40,"XL"],[10,"X"],[9,"IX"],[5,"V"],[4,"IV"],[1,"I"]];let r="";for(const[v,s]of m)while(n>=v){r+=s;n-=v}return r};
+const isPrime=n=>{if(n<2)return false;for(let i=2;i*i<=n;i++)if(n%i===0)return false;return true};
+
+const GEN={
+arith(Lv){
+  const top=Math.pow(10,Math.min(1+Math.floor(Lv/5),4)),k=Lv<4?rnd(0,1):rnd(0,3);
+  let a=rnd(2,top),b=rnd(2,top),q,ans,exp;
+  if(k===0){q=`${a} + ${b}`;ans=a+b;exp=`${q} = ${ans}`}
+  else if(k===1){if(b>a)[a,b]=[b,a];q=`${a} − ${b}`;ans=a-b;exp=`${q} = ${ans}`}
+  else if(k===2){a=rnd(2,Math.min(12+Lv,60));b=rnd(2,Math.min(12+Math.floor(Lv/2),40));q=`${a} × ${b}`;ans=a*b;exp=`${q} = ${ans}`}
+  else{b=rnd(2,Math.min(12+Math.floor(Lv/3),30));ans=rnd(2,Math.min(15+Lv,60));a=b*ans;q=`${a} ÷ ${b}`;exp=`${b} × ${ans} = ${a} ⇒ ${q} = ${ans}`}
+  return{cat:"arith",q:t().qa(q),a:String(ans),opts:numOpts(ans,Math.max(3,Math.round(ans/8)||3)),exp};
+},
+seq(Lv){
+  const k=Lv<6?0:rnd(0,3);let s,n,exp;const T_=t();
+  if(k===0){const a=rnd(1,20),d=rnd(2,9+Lv);s=[0,1,2,3].map(i=>a+d*i);n=a+d*4;exp=T_.sAdd(d,s[3],n)}
+  else if(k===1){const a=rnd(1,4),r=rnd(2,3);s=[0,1,2,3].map(i=>a*Math.pow(r,i));n=a*Math.pow(r,4);exp=T_.sMul(r,s[3],n)}
+  else if(k===2){const o=rnd(1,6);s=[0,1,2,3].map(i=>(i+o)**2);n=(4+o)**2;exp=T_.sSq(o,4+o,n)}
+  else{const a=rnd(1,5),b=rnd(1,6);s=[a,b,a+b,a+2*b];n=s[2]+s[3];exp=T_.sFib(s[2],s[3],n)}
+  return{cat:"seq",q:T_.qs(s.join(", ")),a:String(n),opts:numOpts(n,Math.max(3,Math.round(n/6))),exp};
+},
+bin(Lv){
+  const bits=Math.min(3+Math.floor(Lv/4),10),n=rnd(2,(1<<bits)-1),b=n.toString(2);
+  const ts=[...b].map((c,i)=>c==="1"?1<<(b.length-1-i):null).filter(Boolean).join(" + ")+" = "+n;
+  return{cat:"bin",q:t().qb(b),a:String(n),opts:numOpts(n,Math.max(3,Math.round(n/5))),exp:t().eb(ts)};
+},
+rom(Lv){
+  const n=rnd(2,Math.min(20+Lv*20,3999)),r=roman(n);
+  return{cat:"rom",q:t().qr(r),a:String(n),opts:numOpts(n,Math.max(4,Math.round(n/10))),exp:t().er(r,n)};
+},
+pct(Lv){
+  const p=pick(Lv<8?[10,20,25,50]:[5,12,15,30,35,40,60,75,80]),base=rnd(2,Math.min(10+Lv*2,80))*20,ans=p*base/100;
+  return{cat:"pct",q:t().qp(p,base),a:String(ans),opts:numOpts(ans,Math.max(3,Math.round(ans/4))),exp:`${p}/100 × ${base} = ${ans}`};
+},
+prime(Lv){
+  const hi=Math.min(30+Lv*10,500),pr=[],co=[];
+  for(let i=2;i<=hi;i++)(isPrime(i)?pr:co).push(i);
+  const p=pick(pr.filter(x=>x>hi/3)),cs=shuffle(co.filter(x=>x%2&&x%3&&x>hi/4)).slice(0,3);
+  const d=cs.map(c=>{for(let f=2;f<c;f++)if(c%f===0)return`${c} = ${f} × ${c/f}`;return""}).join("; ");
+  return{cat:"prime",q:t().qpr,a:String(p),opts:shuffle([p,...cs]).map(String),exp:t().ep(p,d)};
+}
+};
+
+function makeQuestion(Lv){
+  if(Math.random()<0.4){
+    const maxD=Math.min(3,1+Math.floor(Lv/6));
+    let pool=T.map((_,i)=>i).filter(i=>T[i][0]<=maxD&&!bag.includes(i));
+    if(!pool.length){bag=[];pool=T.map((_,i)=>i).filter(i=>T[i][0]<=maxD)}
+    const i=pick(pool);bag.push(i);const x=T[i],tx=TR[lang]&&TR[lang][i];
+    return{cat:"tri",q:tx?tx[0]:x[1],a:x[2],opts:shuffle([x[2],...x[3]]),exp:tx?tx[1]:x[4]};
   }
+  return GEN[pick(["arith","arith","seq","bin","rom","pct","prime"])](Lv);
+}
 
-  var verseIdx = dayIndex(verses.length);
-  var encourageIdx = dayIndex(encouragements.length);
-
-  var verseText = document.getElementById('verseText');
-  var verseRef = document.getElementById('verseRef');
-  var encourageText = document.getElementById('encourageText');
-
-  function showVerse(){
-    verseText.textContent = verses[verseIdx % verses.length][0];
-    verseRef.textContent = verses[verseIdx % verses.length][1];
+// ---------- UI + game
+let S={},cur=null,locked=false,lastKey="";
+const MAXL=5;
+function setText(){
+  const x=t();document.documentElement.lang=lang;document.title=x.title;
+  $("tTitle").textContent=x.title;$("tIntro").textContent=x.intro;$("go").textContent=x.start;
+  $("lvlLbl").textContent=x.level;$("scoreLbl").textContent=x.score;$("streakLbl").textContent=x.streak;
+  $("tOver").textContent=x.over;$("again").textContent=x.again;showBest();
+  $("acctT").textContent=x.acct;$("lbT").textContent=x.lb;$("lbEmpty").textContent=x.lbEmpty;$("nick").placeholder=x.nickPh;$("nickBtn").textContent=x.nickBtn;renderAcct();if(FB||NOCFG)setAuthText();
+  if(cur)$("cat").textContent=x.cat[cur.cat];
+}
+function showBest(){const b=store("eq_best");$("best").textContent=b?t().best(...b.split("|")):t().nobest}
+function start(){
+  if(NOCFG||(FB&&!FBU))return;
+  S={level:1,score:0,streak:0,lives:3,right:0,revives:0};bag=[];
+  $("start").classList.add("hide");$("over").classList.add("hide");$("game").classList.remove("hide");$("acct").classList.add("hide");
+  load();
+}
+function render(){
+  $("lvl").textContent=S.level;$("score").textContent=S.score;$("streak").textContent=S.streak;
+  $("lives").textContent="♥".repeat(S.lives)+"♡".repeat(Math.max(0,3-S.lives));
+  $("prog").style.width=((S.level-1)%5)/5*100+"%";
+}
+function load(){
+  let n=0;do{cur=makeQuestion(S.level)}while(cur.q+cur.a===lastKey&&n++<5);
+  lastKey=cur.q+cur.a;locked=false;render();
+  $("cat").textContent=t().cat[cur.cat];$("q").textContent=cur.q;
+  $("fb").className="fb hide";$("next").classList.add("hide");$("revive").classList.add("hide");
+  const box=$("opts");box.innerHTML="";
+  cur.opts.forEach(o=>{const b=document.createElement("button");b.className="opt";b.dataset.v=o;b.textContent=tr(o);b.onclick=()=>answer(b,o);box.appendChild(b)});
+}
+function answer(btn,val){
+  if(locked)return;locked=true;
+  const ok=val===cur.a,x=t();
+  document.querySelectorAll(".opt").forEach(b=>{b.disabled=true;if(b.dataset.v===cur.a)b.classList.add("ok")});
+  const fb=$("fb");
+  if(ok){
+    S.streak++;S.right++;const pts=10+S.level*2+Math.min(S.streak,10)*2;S.score+=pts;
+    fb.className="fb ok";fb.innerHTML=`<b>${x.ok(pts)}</b>${cur.exp}`;
+  }else{
+    btn.classList.add("bad");S.streak=0;S.lives--;
+    fb.className="fb bad";fb.innerHTML=`<b>${x.bad(tr(cur.a))}</b>${cur.exp}`;
   }
-  function showEncourage(){
-    encourageText.textContent = encouragements[encourageIdx % encouragements.length];
+  if(ok&&S.level%5===0&&S.lives<MAXL){S.lives++;fb.innerHTML+=`<br><br>${x.bonus(S.level)}`}
+  render();
+  const dead=S.lives<=0;
+  $("next").textContent=dead?x.results:x.next(S.level+1);
+  $("next").classList.remove("hide");$("next").focus();
+  $("next").onclick=dead?end:()=>{S.level++;load()};
+  if(dead)offerRevive();
+}
+function end(){
+  $("revive").classList.add("hide");
+  $("game").classList.add("hide");$("over").classList.remove("hide");$("acct").classList.remove("hide");
+  $("ofin").textContent=S.score;
+  const b=store("eq_best"),prev=b?+b.split("|")[1]:-1;let nb="";
+  if(S.score>prev){store("eq_best",`${S.level}|${S.score}`);nb=t().nb}
+  $("osum").textContent=t().reached(S.level,S.right)+nb;
+  showBest();saveScore();
+}
+// ---------- Accounts: viewer's Claude account (user + db capabilities) or a local nickname
+Object.assign(L.en,{acct:"Player profile",signed:n=>`Signed in as ${n}.`,sync:"Your best score is saved to your account and shown on the leaderboard.",guest:"Pick a nickname to create a profile. Sign-in with Google or email isn't available on this page, so progress stays on this device.",hello:n=>`Playing as ${n}. Progress is saved on this device only.`,nickPh:"Nickname",nickBtn:"Create profile",lb:"Leaderboard",lbEmpty:"No scores yet. Be the first!",anon:"Player",ro:"Your access is view-only, so this score wasn't posted."});
+Object.assign(L.fil,{acct:"Profile ng manlalaro",signed:n=>`Naka-sign in bilang ${n}.`,sync:"Nase-save sa account mo ang best score mo at lumalabas ito sa leaderboard.",guest:"Pumili ng nickname para gumawa ng profile. Hindi available sa page na ito ang pag-sign in gamit ang Google o email, kaya sa device na ito lang nase-save ang progress.",hello:n=>`Naglalaro bilang ${n}. Sa device na ito lang nase-save ang progress.`,nickPh:"Nickname",nickBtn:"Gumawa ng profile",lb:"Leaderboard",lbEmpty:"Wala pang score. Ikaw ang una!",anon:"Manlalaro",ro:"View-only ang access mo, kaya hindi na-post ang score na ito."});
+Object.assign(L.es,{acct:"Perfil de jugador",signed:n=>`Sesión iniciada como ${n}.`,sync:"Tu mejor puntuación se guarda en tu cuenta y aparece en la clasificación.",guest:"Elige un apodo para crear un perfil. Iniciar sesión con Google o correo no está disponible en esta página, así que el progreso se queda en este dispositivo.",hello:n=>`Jugando como ${n}. El progreso se guarda solo en este dispositivo.`,nickPh:"Apodo",nickBtn:"Crear perfil",lb:"Clasificación",lbEmpty:"Aún no hay puntuaciones. ¡Sé el primero!",anon:"Jugador",ro:"Tu acceso es de solo lectura, así que esta puntuación no se publicó."});
+let DB=null,UM=null,UID=null;
+async function initAccount(){
+  if(initFirebase())return startFbAuth();
+  if(!window.claude)return startNoConfig();
+  try{if(window.claude){UM=await claude.use("user");DB=await claude.use("db");if(UM&&DB)UID=await UM.id()}}catch(e){}
+  if(!UID)DB=null;
+  renderAcct();loadLB();
+}
+async function renderAcct(){
+  if(FB)return renderFbAcct();
+  const x=t(),m=$("acctMsg");
+  if(UID){
+    let n="";try{n=(await UM.me()).name}catch(e){}
+    m.textContent=x.signed(n||x.anon)+" "+x.sync;$("guestBox").classList.add("hide");$("lbBox").classList.remove("hide");
+  }else{
+    const n=store("eq_nick");m.textContent=n?x.hello(n):x.guest;
+    $("guestBox").classList.remove("hide");$("lbBox").classList.add("hide");if(n&&!$("nick").value)$("nick").value=n;
   }
-  showVerse();
-  showEncourage();
-
-  document.getElementById('verseNextBtn').addEventListener('click', function(){
-    verseIdx = (verseIdx + 1) % verses.length;
-    showVerse();
-  });
-  document.getElementById('encourageNextBtn').addEventListener('click', function(){
-    encourageIdx = (encourageIdx + 1) % encouragements.length;
-    showEncourage();
-  });
-
-  function copyToClipboard(text, btn){
-    var original = btn.textContent;
-    function done(ok){
-      btn.textContent = ok ? 'Copied' : 'Copy failed';
-      setTimeout(function(){ btn.textContent = original; }, 1400);
-    }
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(text).then(function(){ done(true); }).catch(function(){ done(false); });
-    } else {
-      done(false);
-    }
-  }
-  document.getElementById('verseCopyBtn').addEventListener('click', function(e){
-    copyToClipboard(verseText.textContent + ' — ' + verseRef.textContent, e.currentTarget);
-  });
-  document.getElementById('encourageCopyBtn').addEventListener('click', function(e){
-    copyToClipboard(encourageText.textContent, e.currentTarget);
-  });
-
-  // ---------- Daily streak (per-browser, local only) ----------
-  (function streak(){
-    var line = document.getElementById('streakLine');
+}
+async function loadLB(){
+  if(FB)return fbLoadLB();
+  if(!DB)return;
+  try{
+    const snap=await DB.collection("leaderboard").orderBy("score","desc").limit(10).get();
+    const ps=snap.empty?{}:await UM.profiles(snap.docs.map(d=>d.id));
+    const ol=$("lb");ol.innerHTML="";$("lbEmpty").classList.toggle("hide",!snap.empty);
+    snap.docs.forEach(d=>{const v=d.data(),p=ps[d.id],li=document.createElement("li");
+      li.textContent=`${(p&&p.name)||t().anon}${p&&p.isMe?" ★":""}: ${v.score} (${t().level} ${v.level})`;ol.appendChild(li)});
+  }catch(e){}
+}
+async function saveScore(){
+  if(FB)return fbSaveScore();
+  if(!UID||!DB)return;
+  try{
+    const ref=DB.collection("leaderboard").doc(UID),s=await ref.get(),o=s.exists?s.data():null;
+    if(!o||S.score>o.score)await ref.set({score:S.score,level:S.level});
+    loadLB();
+  }catch(e){$("osum").textContent+=" "+t().ro}
+}
+// ---------- Secure sign-in (Firebase Auth + Firestore). With no config below, the page behaves as before.
+const FIREBASE_CONFIG={apiKey:"AIzaSyChRd18jDdYd_FjrZ1V5hu4VecJprWLNPI",authDomain:"quiz-earn-learn.firebaseapp.com",projectId:"quiz-earn-learn",appId:"1:339472385426:web:3f59948bddbe4ba2c6ad4b"}; // paste your Firebase web app config here
+Object.assign(L.en,{noCfg:"Sign-in isn't set up yet. The site owner needs to add the Firebase config.",aTitle:"Welcome back",tabIn:"Sign in",tabUp:"Create account",aName:"Display name",aEmail:"Email",aPass:"Password (8+ characters)",subIn:"Sign in",subUp:"Create account",google:"Continue with Google",forgot:"Forgot password?",guestBtn:"Play as guest",signOut:"Sign out",signIn:"Sign in",fbGuest:"Playing as a guest. Sign in to post your score to the leaderboard.",eFill:"Enter your email and password.",eName:"Enter a display name.",eWeak:"Password must be at least 8 characters.",eCred:"Incorrect email or password.",eUsed:"We couldn't create that account. Try signing in instead.",eMany:"Too many attempts. Wait a few minutes and try again.",eNet:"Network error. Check your connection.",eEmail:"Enter a valid email address.",eGen:"Something went wrong. Please try again.",eReset:"Enter your email first, then select Forgot password.",resetSent:"If an account exists for that email, a reset link is on its way.",verifySent:"Account created. We sent a verification email. Verify it to post scores to the leaderboard.",needVerify:"Verify your email to post scores to the leaderboard."});
+Object.assign(L.fil,{noCfg:"Hindi pa naka-set up ang sign-in. Kailangang idagdag ng may-ari ng site ang Firebase config.",aTitle:"Maligayang pagbabalik",tabIn:"Mag-sign in",tabUp:"Gumawa ng account",aName:"Display name",aEmail:"Email",aPass:"Password (8+ character)",subIn:"Mag-sign in",subUp:"Gumawa ng account",google:"Magpatuloy gamit ang Google",forgot:"Nakalimutan ang password?",guestBtn:"Maglaro bilang guest",signOut:"Mag-sign out",signIn:"Mag-sign in",fbGuest:"Naglalaro bilang guest. Mag-sign in para mai-post ang score mo sa leaderboard.",eFill:"Ilagay ang email at password.",eName:"Maglagay ng display name.",eWeak:"Dapat hindi bababa sa 8 character ang password.",eCred:"Mali ang email o password.",eUsed:"Hindi namin magawa ang account na iyon. Subukang mag-sign in.",eMany:"Masyadong maraming subok. Maghintay ng ilang minuto at subukan ulit.",eNet:"May problema sa network. Tingnan ang koneksyon mo.",eEmail:"Maglagay ng wastong email address.",eGen:"May nangyaring mali. Subukan ulit.",eReset:"Ilagay muna ang email, saka piliin ang Nakalimutan ang password.",resetSent:"Kung may account para sa email na iyon, papunta na ang reset link.",verifySent:"Nagawa na ang account. Nagpadala kami ng verification email. I-verify ito para makapag-post ng score sa leaderboard.",needVerify:"I-verify ang email mo para makapag-post ng score sa leaderboard."});
+Object.assign(L.es,{noCfg:"El inicio de sesión aún no está configurado. El propietario del sitio debe añadir la configuración de Firebase.",aTitle:"Bienvenido de nuevo",tabIn:"Iniciar sesión",tabUp:"Crear cuenta",aName:"Nombre visible",aEmail:"Correo electrónico",aPass:"Contraseña (8+ caracteres)",subIn:"Iniciar sesión",subUp:"Crear cuenta",google:"Continuar con Google",forgot:"¿Olvidaste tu contraseña?",guestBtn:"Jugar como invitado",signOut:"Cerrar sesión",signIn:"Iniciar sesión",fbGuest:"Jugando como invitado. Inicia sesión para publicar tu puntuación en la clasificación.",eFill:"Escribe tu correo y contraseña.",eName:"Escribe un nombre visible.",eWeak:"La contraseña debe tener al menos 8 caracteres.",eCred:"Correo o contraseña incorrectos.",eUsed:"No pudimos crear esa cuenta. Prueba a iniciar sesión.",eMany:"Demasiados intentos. Espera unos minutos e inténtalo de nuevo.",eNet:"Error de red. Revisa tu conexión.",eEmail:"Escribe un correo válido.",eGen:"Algo salió mal. Inténtalo de nuevo.",eReset:"Escribe primero tu correo y luego elige ¿Olvidaste tu contraseña?",resetSent:"Si existe una cuenta con ese correo, el enlace de restablecimiento va en camino.",verifySent:"Cuenta creada. Enviamos un correo de verificación. Verifícalo para publicar puntuaciones en la clasificación.",needVerify:"Verifica tu correo para publicar puntuaciones en la clasificación."});
+let NOCFG=false,FB=null,FBU=null,guestMode=false,authMode="in",lastUid="__init__";
+function initFirebase(){
+  if(!FIREBASE_CONFIG.apiKey||!window.firebase)return false;
+  try{firebase.initializeApp(FIREBASE_CONFIG);FB={auth:firebase.auth(),db:firebase.firestore()};return true}catch(e){FB=null;return false}
+}
+const dispName=u=>String((u&&u.displayName)||t().anon).slice(0,20);
+function amsg(text,good){const m=$("aMsg");m.textContent=text||"";m.className=good?"amsg good":"amsg"}
+function busy(on){["aSubmit","aGoogle"].forEach(id=>$(id).disabled=on)}
+function setAuthMode(m){
+  authMode=m;const up=m==="up",x=t();
+  $("tabIn").setAttribute("aria-selected",!up);$("tabUp").setAttribute("aria-selected",up);
+  $("aName").classList.toggle("hide",!up);$("aSubmit").textContent=up?x.subUp:x.subIn;
+  $("aPass").autocomplete=up?"new-password":"current-password";amsg("");
+}
+function setAuthText(){
+  const x=t();$("aTitle").textContent=x.aTitle;$("tabIn").textContent=x.tabIn;$("tabUp").textContent=x.tabUp;
+  $("aName").placeholder=x.aName;$("aName").setAttribute("aria-label",x.aName);
+  $("aEmail").placeholder=x.aEmail;$("aEmail").setAttribute("aria-label",x.aEmail);
+  $("aPass").placeholder=x.aPass;$("aPass").setAttribute("aria-label",x.aPass);
+  $("aGoogle").textContent=x.google;$("aForgot").textContent=x.forgot;
+  setAuthMode(authMode);renderFbAcct();
+  if(NOCFG)amsg(x.noCfg);
+}
+function showAuth(on){
+  ["start","over","game"].forEach(id=>$(id).classList.add("hide"));
+  $("acct").classList.toggle("hide",on);$("auth").classList.toggle("hide",!on);
+  if(!on)$("start").classList.remove("hide");
+}
+function errText(e){
+  const x=t(),c=(e&&e.code)||"";
+  if(["auth/invalid-credential","auth/user-not-found","auth/wrong-password","auth/invalid-login-credentials"].includes(c))return x.eCred;
+  if(c==="auth/email-already-in-use")return x.eUsed;
+  if(c==="auth/weak-password")return x.eWeak;
+  if(c==="auth/invalid-email")return x.eEmail;
+  if(c==="auth/too-many-requests")return x.eMany;
+  if(c==="auth/network-request-failed")return x.eNet;
+  if(c==="auth/popup-closed-by-user"||c==="auth/cancelled-popup-request")return "";
+  return x.eGen;
+}
+async function submitAuth(ev){
+  ev.preventDefault();const x=t(),email=$("aEmail").value.trim(),pw=$("aPass").value;
+  if(!email||!pw){amsg(x.eFill);return}
+  if(authMode==="up"){
+    const nm=$("aName").value.trim().slice(0,20);
+    if(!nm){amsg(x.eName);return}
+    if(pw.length<8){amsg(x.eWeak);return}
+    busy(true);
     try{
-      var todayStr = new Date().toDateString();
-      var last = localStorage.getItem('dailylight_last');
-      var count = parseInt(localStorage.getItem('dailylight_streak') || '0', 10);
-
-      if(last !== todayStr){
-        var y = new Date();
-        y.setDate(y.getDate() - 1);
-        count = (last === y.toDateString()) ? count + 1 : 1;
-        localStorage.setItem('dailylight_last', todayStr);
-        localStorage.setItem('dailylight_streak', String(count));
-      }
-      line.innerHTML = count > 1
-        ? 'Day <strong>' + count + '</strong> of showing up.'
-        : 'Welcome. Today is day one.';
-    } catch(e){
-      line.textContent = '';
-    }
-  })();
-
-  // ---------- Breathing exercise (box breathing: in-hold-out-hold, 4s each) ----------
-  var circle = document.getElementById('breatheCircle');
-  var note = document.getElementById('breatheNote');
-  var running = false;
-  var phaseTimer = null;
-  var phases = [
-    { label: 'Breathe in', expand: true },
-    { label: 'Hold', expand: true },
-    { label: 'Breathe out', expand: false },
-    { label: 'Hold', expand: false }
-  ];
-  var phaseIndex = 0;
-
-  function runPhase(){
-    var p = phases[phaseIndex % phases.length];
-    circle.textContent = p.label;
-    circle.classList.toggle('expand', p.expand);
-    phaseIndex++;
-    phaseTimer = setTimeout(runPhase, 4000);
+      const c=await FB.auth.createUserWithEmailAndPassword(email,pw);
+      await c.user.updateProfile({displayName:nm});
+      try{await c.user.sendEmailVerification()}catch(_){}
+      renderFbAcct();amsg(x.verifySent,true);
+    }catch(e){amsg(errText(e))}
+  }else{
+    busy(true);
+    try{await FB.auth.signInWithEmailAndPassword(email,pw);amsg("")}catch(e){amsg(errText(e))}
   }
-
-  function startBreathing(){
-    running = true;
-    phaseIndex = 0;
-    note.textContent = 'Follow the circle. Tap again to stop.';
-    runPhase();
-  }
-  function stopBreathing(){
-    running = false;
-    clearTimeout(phaseTimer);
-    circle.classList.remove('expand');
-    circle.textContent = 'Start';
-    note.textContent = 'A slow, four-count breath — in, hold, out, hold.';
-  }
-
-  circle.addEventListener('click', function(){
-    if(running){ stopBreathing(); } else { startBreathing(); }
+  $("aPass").value="";busy(false);
+}
+async function googleAuth(){
+  busy(true);amsg("");
+  try{await FB.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())}catch(e){amsg(errText(e))}
+  busy(false);
+}
+async function forgot(){
+  const x=t(),email=$("aEmail").value.trim();
+  if(!email){amsg(x.eReset);return}
+  try{await FB.auth.sendPasswordResetEmail(email)}catch(e){if(e&&e.code==="auth/network-request-failed"){amsg(x.eNet);return}}
+  amsg(x.resetSent,true); // same message whether or not the account exists
+}
+function startNoConfig(){
+  NOCFG=true;showAuth(true);
+  document.querySelectorAll("#auth input,#auth button").forEach(e=>e.disabled=true);
+  setAuthText();
+}
+function startFbAuth(){
+  $("start").classList.add("hide");$("acct").classList.add("hide");
+  $("tabIn").onclick=()=>setAuthMode("in");$("tabUp").onclick=()=>setAuthMode("up");
+  $("authForm").onsubmit=submitAuth;$("aGoogle").onclick=googleAuth;$("aForgot").onclick=forgot;
+  $("outBtn").onclick=()=>{if(FBU)FB.auth.signOut();else{guestMode=false;showAuth(true)}};
+  FB.auth.onAuthStateChanged(u=>{
+    FBU=u;const uid=u?u.uid:null,changed=uid!==lastUid;lastUid=uid;
+    if(changed){if(u)guestMode=false;showAuth(!u&&!guestMode)}
+    renderFbAcct();fbLoadLB();
   });
-
-  // ---------- Ambient sound (synthesized, no external audio files) ----------
-  var audioCtx = null;
-  var masterGain = null;
-  var voiceNodes = [];
-  var noiseNodes = [];
-  var isPlaying = false;
-
-  var toggleBtn = document.getElementById('audioToggleBtn');
-  var audioIcon = document.getElementById('audioIcon');
-  var audioLabel = document.getElementById('audioLabel');
-  var volumeSlider = document.getElementById('volumeSlider');
-
-  function maxGainFromSlider(){
-    return (parseFloat(volumeSlider.value) / 100) * 0.3;
+  setAuthText();
+}
+function renderFbAcct(){
+  if(!FB)return;
+  const x=t(),m=$("acctMsg");$("guestBox").classList.add("hide");$("outBtn").classList.remove("hide");
+  if(FBU){
+    m.textContent=x.signed(dispName(FBU))+" "+x.sync+(FBU.emailVerified?"":" "+x.needVerify);
+    $("lbBox").classList.remove("hide");$("outBtn").textContent=x.signOut;
+  }else{
+    m.textContent=x.fbGuest;$("lbBox").classList.add("hide");$("outBtn").textContent=x.signIn;
   }
-
-  function ensureAudioContext(){
-    if(!audioCtx){
-      var AC = window.AudioContext || window.webkitAudioContext;
-      audioCtx = new AC();
-      masterGain = audioCtx.createGain();
-      masterGain.gain.value = 0.0001;
-      masterGain.connect(audioCtx.destination);
-    }
-  }
-
-  function buildPad(){
-    var freqs = [130.81, 164.81, 196.00, 261.63];
-    freqs.forEach(function(freq, i){
-      var osc = audioCtx.createOscillator();
-      osc.type = 'sine';
-      osc.frequency.value = freq;
-
-      var filter = audioCtx.createBiquadFilter();
-      filter.type = 'lowpass';
-      filter.frequency.value = 1100;
-
-      var voiceGain = audioCtx.createGain();
-      voiceGain.gain.value = 0.16 / freqs.length;
-
-      var lfo = audioCtx.createOscillator();
-      lfo.type = 'sine';
-      lfo.frequency.value = 0.045 + i * 0.012;
-      var lfoGain = audioCtx.createGain();
-      lfoGain.gain.value = 0.06 / freqs.length;
-      lfo.connect(lfoGain);
-      lfoGain.connect(voiceGain.gain);
-
-      osc.connect(filter);
-      filter.connect(voiceGain);
-      voiceGain.connect(masterGain);
-
-      osc.start();
-      lfo.start();
-      voiceNodes.push(osc, lfo);
+}
+async function fbLoadLB(){
+  if(!FB||!FBU)return;
+  try{
+    const snap=await FB.db.collection("leaderboard").orderBy("score","desc").limit(10).get();
+    const ol=$("lb");ol.innerHTML="";$("lbEmpty").classList.toggle("hide",!snap.empty);
+    snap.forEach(d=>{const v=d.data(),li=document.createElement("li");
+      li.textContent=`${String(v.name||t().anon).slice(0,20)}${d.id===FBU.uid?" ★":""}: ${v.score} (${t().level} ${v.level})`;ol.appendChild(li)});
+  }catch(e){}
+}
+async function fbSaveScore(){
+  if(!FB||!FBU)return;
+  try{
+    await FBU.reload();await FBU.getIdToken(true);
+    if(!FBU.emailVerified){$("osum").textContent+=" "+t().needVerify;return}
+    const ref=FB.db.collection("leaderboard").doc(FBU.uid),s=await ref.get();
+    if(!s.exists||S.score>s.data().score)await ref.set({name:dispName(FBU),score:S.score,level:S.level,updated:firebase.firestore.FieldValue.serverTimestamp()});
+    fbLoadLB();
+  }catch(e){$("osum").textContent+=" "+t().ro}
+}
+// ---------- Rewarded ads: AdSense H5 Games Ads (Ad Placement API). One extra life per ad the player chooses to watch.
+// Keep test:true until Google approves H5 Games Ads for your account, then set test:false.
+const ADS={client:"ca-pub-3070013351505360",test:true,on:false};
+const MAXREV=1; // extra lives a player can earn per game
+Object.assign(L.en,{revive:"Watch an ad to continue with 1 life"});
+Object.assign(L.fil,{revive:"Manood ng ad para magpatuloy na may 1 buhay"});
+Object.assign(L.es,{revive:"Mira un anuncio para continuar con 1 vida"});
+let adShowing=false,reviveGo=false;
+function initAds(){
+  if(!ADS.client)return;
+  const sc=document.createElement("script");
+  sc.async=true;sc.crossOrigin="anonymous";
+  sc.setAttribute("data-ad-frequency-hint","30s");
+  if(ADS.test)sc.setAttribute("data-adbreak-test","on");
+  sc.src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client="+encodeURIComponent(ADS.client);
+  sc.onerror=()=>{ADS.on=false};
+  document.head.appendChild(sc);
+  window.adsbygoogle=window.adsbygoogle||[];
+  window.adBreak=window.adConfig=o=>window.adsbygoogle.push(o);
+  ADS.on=true;
+  adConfig({preloadAdBreaks:"on",sound:"on"});
+}
+function offerRevive(){
+  if(!ADS.on||S.revives>=MAXREV)return;
+  reviveGo=false;
+  try{
+    adBreak({
+      type:"reward",name:"extra_life",
+      // Shown only when Google has a rewarded ad ready. The player opts in by tapping the button.
+      beforeReward:show=>{const b=$("revive");b.textContent=t().revive;b.classList.remove("hide");b.onclick=()=>{b.classList.add("hide");show()}},
+      beforeAd:()=>{adShowing=true},
+      adViewed:()=>{reviveGo=true},   // watched to the end: reward is granted in afterAd
+      adDismissed:()=>{},             // closed early: no reward
+      afterAd:()=>{adShowing=false;if(reviveGo){reviveGo=false;S.revives++;S.lives=1;S.level++;load()}},
+      adBreakDone:()=>{}
     });
-  }
-
-  function buildNoise(){
-    var bufferSize = 2 * audioCtx.sampleRate;
-    var buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-    var data = buffer.getChannelData(0);
-    var lastOut = 0;
-    for(var i = 0; i < bufferSize; i++){
-      var white = Math.random() * 2 - 1;
-      lastOut = (lastOut + (0.02 * white)) / 1.02;
-      data[i] = lastOut * 3.2;
-    }
-    var noiseSource = audioCtx.createBufferSource();
-    noiseSource.buffer = buffer;
-    noiseSource.loop = true;
-
-    var noiseFilter = audioCtx.createBiquadFilter();
-    noiseFilter.type = 'bandpass';
-    noiseFilter.frequency.value = 500;
-    noiseFilter.Q.value = 0.4;
-
-    var noiseGain = audioCtx.createGain();
-    noiseGain.gain.value = 0.035;
-
-    noiseSource.connect(noiseFilter);
-    noiseFilter.connect(noiseGain);
-    noiseGain.connect(masterGain);
-    noiseSource.start();
-    noiseNodes.push(noiseSource);
-  }
-
-  function updateButtonUI(){
-    audioIcon.textContent = isPlaying ? '⏸' : '🎵';
-    audioLabel.textContent = isPlaying ? 'Pause ambient sound' : 'Play ambient sound';
-    toggleBtn.setAttribute('aria-pressed', isPlaying ? 'true' : 'false');
-  }
-
-  function startAmbient(){
-    ensureAudioContext();
-    if(audioCtx.state === 'suspended'){ audioCtx.resume(); }
-    if(voiceNodes.length === 0){
-      buildPad();
-      buildNoise();
-    }
-    var now = audioCtx.currentTime;
-    var target = maxGainFromSlider();
-    masterGain.gain.cancelScheduledValues(now);
-    masterGain.gain.setValueAtTime(masterGain.gain.value, now);
-    masterGain.gain.linearRampToValueAtTime(target, now + 1.6);
-    isPlaying = true;
-    updateButtonUI();
-  }
-
-  function stopAmbient(){
-    if(audioCtx){
-      var now = audioCtx.currentTime;
-      masterGain.gain.cancelScheduledValues(now);
-      masterGain.gain.setValueAtTime(masterGain.gain.value, now);
-      masterGain.gain.linearRampToValueAtTime(0.0001, now + 1.2);
-    }
-    isPlaying = false;
-    updateButtonUI();
-  }
-
-  toggleBtn.addEventListener('click', function(){
-    if(isPlaying){ stopAmbient(); } else { startAmbient(); }
-  });
-
-  volumeSlider.addEventListener('input', function(){
-    if(audioCtx && masterGain && isPlaying){
-      masterGain.gain.setTargetAtTime(maxGainFromSlider(), audioCtx.currentTime, 0.08);
-    }
-  });
-
-  // ---------- Privacy page "last updated" date ----------
-  var lastUpdatedEl = document.getElementById('lastUpdated');
-  if(lastUpdatedEl){
-    lastUpdatedEl.textContent = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
-  }
-
-})();
+  }catch(e){}
+}
+$("nickBtn").onclick=()=>{const n=$("nick").value.trim().slice(0,20);if(n){store("eq_nick",n);renderAcct()}};
+$("nick").onkeydown=e=>{if(e.key==="Enter")$("nickBtn").click()};
+initAccount();initAds();
+const sel=$("lang");
+Object.keys(LANGS).forEach(k=>{const o=document.createElement("option");o.value=k;o.textContent=LANGS[k];sel.appendChild(o)});
+sel.value=lang;
+sel.onchange=()=>{lang=sel.value;store("eq_lang",lang);setText()};
+$("go").onclick=start;$("again").onclick=start;
+document.addEventListener("keydown",e=>{
+  if(document.activeElement===sel||document.activeElement.tagName==="INPUT")return;
+  if(e.key>="1"&&e.key<="4"&&!locked&&!$("game").classList.contains("hide")){const b=document.querySelectorAll(".opt")[+e.key-1];if(b)b.click()}
+  else if(e.key==="Enter"&&locked&&!adShowing&&!$("next").classList.contains("hide"))$("next").click();
+});
+setText();
 </script>
+
 </body>
 </html>
