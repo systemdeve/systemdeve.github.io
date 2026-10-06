@@ -49,7 +49,16 @@ button{font:inherit;cursor:pointer}
 .lnks{display:flex;justify-content:space-between;gap:10px;margin-top:12px;flex-wrap:wrap}
 .lnk{background:none;border:0;color:var(--acc);text-decoration:underline;font:15px system-ui,sans-serif;padding:6px 2px}
 .amsg{min-height:20px;font:15px/1.4 system-ui,sans-serif;color:var(--bad)}.amsg.good{color:var(--ok)}
-.acct #outBtn{margin-top:10px}
+.acct #outBtn,.acct #lbOpen{margin-top:10px;margin-right:8px}
+dialog{border:1px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);width:min(520px,92vw);max-height:80vh;padding:0;overflow:auto;font:16px/1.5 system-ui,sans-serif}
+dialog::backdrop{background:rgba(0,0,0,.55)}
+.dlgb{padding:18px}
+.dlgh{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.dlgh h2{font:700 22px Georgia,serif;margin:0}
+.dlgh button{background:transparent;border:2px solid var(--line);color:var(--ink);border-radius:8px;width:36px;height:36px;font-size:16px;line-height:1}
+.dlgh button:focus-visible,#lbMore:focus-visible,.acct button:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+#lb{margin:0;padding-left:36px}#lb li{padding:7px 0;border-bottom:1px solid var(--line)}
+#lbMore{margin-top:14px}
 </style>
 </head>
 <body>
@@ -90,8 +99,14 @@ button{font:inherit;cursor:pointer}
 
   <section id="acct" class="acct"><b id="acctT"></b><div id="acctMsg"></div><button type="button" id="outBtn" class="hide"></button>
     <div id="guestBox" class="hide"><input id="nick" maxlength="20"><button id="nickBtn"></button></div>
-    <div id="lbBox" class="hide"><h2 id="lbT"></h2><div id="lbEmpty" class="hide"></div><ol id="lb"></ol></div>
+    <button type="button" id="lbOpen" class="hide"></button>
   </section>
+  <dialog id="lbDlg" aria-labelledby="lbT"><div class="dlgb">
+    <div class="dlgh"><h2 id="lbT"></h2><button type="button" id="lbClose">✕</button></div>
+    <div id="lbEmpty" class="hide"></div>
+    <ol id="lb"></ol>
+    <button type="button" class="btn alt hide" id="lbMore"></button>
+  </div></dialog>
 
   <div id="over" class="card center hide">
     <h1 id="tOver"></h1>
@@ -244,7 +259,7 @@ function setText(){
   $("tTitle").textContent=x.title;$("tIntro").textContent=x.intro;$("go").textContent=x.start;
   $("lvlLbl").textContent=x.level;$("scoreLbl").textContent=x.score;$("streakLbl").textContent=x.streak;
   $("tOver").textContent=x.over;$("again").textContent=x.again;showBest();
-  $("acctT").textContent=x.acct;$("lbT").textContent=x.lb;$("lbEmpty").textContent=x.lbEmpty;$("nick").placeholder=x.nickPh;$("nickBtn").textContent=x.nickBtn;renderAcct();if(FB||NOCFG)setAuthText();
+  $("acctT").textContent=x.acct;$("lbT").textContent=x.lb;$("lbOpen").textContent=x.lb;$("lbMore").textContent=x.more;$("lbClose").setAttribute("aria-label",x.close);$("lbEmpty").textContent=x.lbEmpty;$("nick").placeholder=x.nickPh;$("nickBtn").textContent=x.nickBtn;renderAcct();if(FB||NOCFG)setAuthText();
   if(cur)$("cat").textContent=x.cat[cur.cat];
 }
 function showBest(){const b=store("eq_best");$("best").textContent=b?t().best(...b.split("|")):t().nobest}
@@ -313,10 +328,10 @@ async function renderAcct(){
   const x=t(),m=$("acctMsg");
   if(UID){
     let n="";try{n=(await UM.me()).name}catch(e){}
-    m.textContent=x.signed(n||x.anon)+" "+x.sync;$("guestBox").classList.add("hide");$("lbBox").classList.remove("hide");
+    m.textContent=x.signed(n||x.anon)+" "+x.sync;$("guestBox").classList.add("hide");$("lbOpen").classList.remove("hide");
   }else{
     const n=store("eq_nick");m.textContent=n?x.hello(n):x.guest;
-    $("guestBox").classList.remove("hide");$("lbBox").classList.add("hide");if(n&&!$("nick").value)$("nick").value=n;
+    $("guestBox").classList.remove("hide");$("lbOpen").classList.add("hide");if(n&&!$("nick").value)$("nick").value=n;
   }
 }
 async function loadLB(){
@@ -427,7 +442,7 @@ function startFbAuth(){
   FB.auth.onAuthStateChanged(u=>{
     FBU=u;const uid=u?u.uid:null,changed=uid!==lastUid;lastUid=uid;
     if(changed){if(u)guestMode=false;showAuth(!u&&!guestMode)}
-    renderFbAcct();fbLoadLB();
+    renderFbAcct();
   });
   setAuthText();
 }
@@ -436,18 +451,25 @@ function renderFbAcct(){
   const x=t(),m=$("acctMsg");$("guestBox").classList.add("hide");$("outBtn").classList.remove("hide");
   if(FBU){
     m.textContent=x.signed(dispName(FBU))+" "+x.sync+(FBU.emailVerified?"":" "+x.needVerify);
-    $("lbBox").classList.remove("hide");$("outBtn").textContent=x.signOut;
+    $("lbOpen").classList.remove("hide");$("outBtn").textContent=x.signOut;
   }else{
-    m.textContent=x.fbGuest;$("lbBox").classList.add("hide");$("outBtn").textContent=x.signIn;
+    m.textContent=x.fbGuest;$("lbOpen").classList.add("hide");$("outBtn").textContent=x.signIn;
   }
 }
-async function fbLoadLB(){
+let lbLast=null;
+async function fbLoadLB(reset=true){
   if(!FB||!FBU)return;
+  const ol=$("lb"),PAGE=50;
   try{
-    const snap=await FB.db.collection("leaderboard").orderBy("score","desc").limit(10).get();
-    const ol=$("lb");ol.innerHTML="";$("lbEmpty").classList.toggle("hide",!snap.empty);
+    if(reset){lbLast=null;ol.innerHTML=""}
+    let q=FB.db.collection("leaderboard").orderBy("score","desc").limit(PAGE);
+    if(lbLast)q=q.startAfter(lbLast);
+    const snap=await q.get();
+    if(!snap.empty)lbLast=snap.docs[snap.docs.length-1];
     snap.forEach(d=>{const v=d.data(),li=document.createElement("li");
       li.textContent=`${String(v.name||t().anon).slice(0,20)}${d.id===FBU.uid?" ★":""}: ${v.score} (${t().level} ${v.level})`;ol.appendChild(li)});
+    $("lbEmpty").classList.toggle("hide",ol.children.length>0);
+    $("lbMore").classList.toggle("hide",snap.size<PAGE);
   }catch(e){}
 }
 async function fbSaveScore(){
@@ -457,7 +479,6 @@ async function fbSaveScore(){
     if(!FBU.emailVerified){$("osum").textContent+=" "+t().needVerify;return}
     const ref=FB.db.collection("leaderboard").doc(FBU.uid),s=await ref.get();
     if(!s.exists||S.score>s.data().score)await ref.set({name:dispName(FBU),score:S.score,level:S.level,updated:firebase.firestore.FieldValue.serverTimestamp()});
-    fbLoadLB();
   }catch(e){$("osum").textContent+=" "+t().ro}
 }
 // ---------- Rewarded ads: AdSense H5 Games Ads (Ad Placement API). One extra life per ad the player chooses to watch.
@@ -467,6 +488,13 @@ const MAXREV=1; // extra lives a player can earn per game
 Object.assign(L.en,{revive:"Watch an ad to continue with 1 life"});
 Object.assign(L.fil,{revive:"Manood ng ad para magpatuloy na may 1 buhay"});
 Object.assign(L.es,{revive:"Mira un anuncio para continuar con 1 vida"});
+Object.assign(L.en,{more:"Show more",close:"Close"});
+Object.assign(L.fil,{more:"Magpakita pa",close:"Isara"});
+Object.assign(L.es,{more:"Mostrar más",close:"Cerrar"});
+$("lbOpen").onclick=()=>{const d=$("lbDlg");if(!d.open)d.showModal();FB?fbLoadLB(true):loadLB()};
+$("lbClose").onclick=()=>$("lbDlg").close();
+$("lbDlg").onclick=e=>{if(e.target===$("lbDlg"))$("lbDlg").close()};
+$("lbMore").onclick=()=>fbLoadLB(false);
 let adShowing=false,reviveGo=false;
 function initAds(){
   if(!ADS.client)return;
